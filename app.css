@@ -1,0 +1,87 @@
+#root{
+    overflow-x: hidden;
+}
+.bgborder{
+    border: 2px solid black;
+    border-radius: 5%;
+}
+.linkstyle{
+    text-decoration: none;
+}
+.cardstyle{
+    height: 100%;
+    /* width: 200px; */
+    align-items: center;
+    margin: 10px;
+    /* padding: 3vh 2vw; */
+    background-color: #f8f9fa;
+    border-radius: 5%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.cardstyle:hover{
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+.imageOfCard{
+    width: 100%;
+    height: 200px;
+    padding: 2vh 1vw;
+}
+.logo{
+    background: no-repeat;
+    background-image: url('./images/Sellpageimg.png');
+    width: 70vw;
+    height: 45vh;
+    background-size: cover;
+}
+.sellleft{
+    padding: 5vh 10vw;
+}
+.backgroundofsell1{
+    background-color: blue;
+}
+.textchange{
+    color: red;
+    font-weight: bold;
+    animation: upup 10s linear infinite alternate-reverse;
+}
+
+/* .setimg{
+    width: 100%;
+    height: auto;
+    background-size: cover;
+    background-image: url('./images/backgroundweb.webp');
+} */
+
+li{
+    list-style: none;
+    font-size: calc(1.375rem + 1.5vw);
+    font-weight: 300;
+    line-height: 2;
+}
+
+@keyframes upup{
+    /* 0%{
+        top: -7vh;
+    }
+    20%{
+     top:-14vh;
+    }
+    40%{
+        top:-21vh;
+    }
+    60%{
+        top:-28vh;
+    }   
+    80%{
+       top:-35vh;
+    }
+    100%{
+        top:-42vh;
+    } */
+     to{
+        transform: translateY(0);
+     }
+     from{
+        transform: translateY(calc(-12.375rem - 13.5vw));
+     }
+}

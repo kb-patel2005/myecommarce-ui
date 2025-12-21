@@ -1,0 +1,36 @@
+# Node dependencies
+node_modules/
+
+# Parcel build output
+dist/
+
+# Parcel cache
+.parcel-cache/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.*.local
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Optional: test coverage reports
+coverage/
+
+# Optional: misc
+*.log
+
+package-lock.json
