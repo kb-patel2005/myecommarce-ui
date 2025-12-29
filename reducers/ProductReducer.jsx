@@ -24,7 +24,7 @@ export const addProduct = createAsyncThunk(
 
 export const fetchProductById = createAsyncThunk(
     "products/fetchProductById", async (pId) => {
-        const responsedata = await axios.get(`http://localhost:8080/cart/${pId}`);
+        const responsedata = await axios.get(`https://docker-apis.onrender.com/cart/${pId}`);
         return responsedata.data;
     }
 )

@@ -31,7 +31,7 @@ export default function Home() {
         return;
       }
 
-      axios.get(`http://localhost:8080/products?page=${page}&size=${pageSize}`)
+      axios.get(`https://docker-apis.onrender.com/products?page=${page}&size=${pageSize}`)
         .then(res => {
           const newData = res.data.content;
           setProduct(prev => [...prev, ...newData]);
