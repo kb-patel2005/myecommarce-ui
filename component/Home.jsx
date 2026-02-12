@@ -7,6 +7,11 @@ import axios from 'axios';
 
 export default function Home() {
   const dispatch = useDispatch();
+  const [product, setProduct] = useState([]);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(null);
+  const pageSize = 3;
+  const [flag, setFlag] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,38 +24,40 @@ export default function Home() {
     fetchData();
   }, [dispatch]);
 
-  const [product, setProduct] = useState([]);
-  const [page, setPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(null);
-  const pageSize = 1;
-
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (totalPages !== null && page >= totalPages) {
-        clearInterval(interval); // Stop when all pages are fetched
-        return;
+    const fetchPage = async () => {
+      try {
+        const res = await axios.get(
+          `https://docker-apis.onrender.com/products?page=${page}&size=${pageSize}`
+        );
+
+        setProduct(prev => [...prev, ...res.data.content]);
+        setTotalPages(res.data.totalPages);
+
+        // After rendering this page, raise the flag
+        setFlag(true);
+      } catch (err) {
+        console.error('Error fetching product', err);
       }
+    };
 
-      axios.get(`https://docker-apis.onrender.com/products?page=${page}&size=${pageSize}`)
-        .then(res => {
-          const newData = res.data.content;
-          setProduct(prev => [...prev, ...newData]);
-          setPage(prev => prev + 1);
-          setTotalPages(res.data.totalPages); // Set total pages from API response
-        })
-        .catch(err => {
-          console.error('Error fetching page:', err);
-          clearInterval(interval); // Stop on error
-        });
-    }, 1000);
+    if (totalPages === null || page < totalPages) {
+      fetchPage();
+    }
+  }, [page]);
 
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, [page, totalPages]);
-
-  console.log(product);
+  // When flag is raised, move to next page
+  useEffect(() => {
+    if (flag) {
+      if (page + 1 < totalPages) {
+        setPage(prev => prev + 1);
+      }
+      setFlag(false); // reset flag
+    }
+  }, [flag, totalPages, page]);
 
   return (<>
-    <div className='d-flex flex-wrap flex-direction-column justify-content-center align-items-center'>
+    <div className='d-flex flex-wrap gap-3 flex-direction-column justify-content-center align-items-center'>
       {product.map((data, i) =>
       (
         <ProductCard

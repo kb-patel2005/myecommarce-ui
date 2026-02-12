@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router';
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../reducers/UserReducer';
+import saleimg from '../images/saleimg.png';
 
 export default function ProductCard({ title, description, price, qty, image, imgContentType, data1 }) {
 
@@ -20,15 +21,14 @@ export default function ProductCard({ title, description, price, qty, image, img
   return (
     <div style={{ width: '250px' }}>
       <Link className='linkstyle'>
-        <Card>
-          {data1.imageDetail && (
-            <Card.Img
-              variant="top"
-              className='imageOfCard'
-              src={`/products/image/${data1.imageDetail}`}
+        <Card >
+          {data1 && (
+            <img
+              style={{ height: "200px" }}
+              src={`https://docker-apis.onrender.com/image/${product.imagedetail}`}
+              alt="Product"
             />
           )}
-
           <Card.Body style={{ height: "95px", margin: "0px 0px" }}>
             <Card.Title style={{ margin: "0px 0px 0px 0px" }}>{title}</Card.Title>
             <Card.Text>

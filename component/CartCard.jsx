@@ -14,7 +14,7 @@ export default function CartCard({ title ,description ,qty ,productId ,price,del
                 <Row>
                     <Col sm={3}>
                         <img
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3wo2Q9cVOOJyX7JOjX9FpELrwP5xAATF9Pw&s"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3xf4kIusbGklkMbsv9bN-TBmPCxgQZG9LtA&s"
                             style={{ height: "150px", width: "100%", margin: "0", padding: "0", maxWidth: "15  0px" }}
                             alt="product"
                         />
