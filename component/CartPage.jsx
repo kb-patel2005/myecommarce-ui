@@ -2,19 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
+import { Card } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
-import { saveCartItemsInDB } from '../reducers/UserReducer';
 import { fetchProductById } from '../reducers/ProductReducer';
 import { useNavigate } from 'react-router';
+import { Container, Row, Col, Card } from "react-bootstrap";
 import CartCard from './CartCard';
-import { current } from '@reduxjs/toolkit';
+import PayButton from './PayButton';
 
 export default function CartPage() {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state.UserReducer);
   const navigate = useNavigate();
   const [product, setProduct] = useState([]);
+  let totalAmount = product.reduce((acc, current) => acc + (current.price * current.qty), 0);
 
   const fetchItems = (products) => {
     products.map(async (data) => {
@@ -65,61 +66,68 @@ export default function CartPage() {
 
   return (
     <>
-      <div className="d-flex flex-wrap flex-direction-row justify-content-center align-items-center mt-2">
-
-        <Container>
-          <Row>
-            <Col sm={10}></Col>
-            <Col sm={2}><Button variant="primary" onClick={() => { dispatch(saveCartItemsInDB()) }}>Save Changes</Button></Col>
-          </Row>
-          <Row>
-            <Col sm={3}></Col>
-            <Col sm={4}><b>Description</b></Col>
-            <Col sm={5}>
-              <Row>
-                <Col><b>Quantity</b></Col>
-                <Col><b>Price</b></Col>
-                <Col></Col>
-              </Row>
-            </Col>
-          </Row>
-          <Row><hr /></Row>
-        </Container>
-        {
-          Object.keys(selector.loginUser).length > 0 ? (
-            Object.keys(product).length > 0 ?
-              product.map((data, i) =>
-                <CartCard
-                  key={i}
-                  title={data.title} description={data.description} productId={data.pId} qty={data.qty} price={data.price}
-                  deletefunc={deleteFromProduct} incrementfunc={incrementFromProduct} decrementfunc={decrementFromProduct}
-                />) : "")
-            : navigate('/login')
-        }
-
-        <Container>
-          <Row>
-            <hr />
-          </Row>
-          <Row>
-            <Col sm={7}></Col>
-            <Col sm={5}>
-              <Row>
-                <Col><b>Total amount</b></Col>
-                <Col>{
-                  product.reduce((acc, current) => acc + (current.price * current.qty), 0)
-                }</Col>
-                <Col></Col>
-              </Row>
-            </Col>
-          </Row>
-        </Container>
-        {/* <div style={{display:'flex',justifyContent:'flex-end'
-    }}>
       
-    </div> */}
-      </div>
+      {/* import { Container, Row, Col, Card } from "react-bootstrap"; */}
 
+<div className="mt-2">
+  <h3 style={{ width: '50%', margin: 'auto', minWidth: '400px' }}>YOUR CHOOSED PRODUCTS</h3>
+  <Container fluid>
+    <Row className="flex-wrap">
+      {/* Cart Items */}
+      <Col xs={12} lg={8} className="d-flex flex-column align-items-center">
+        {Object.keys(selector.loginUser).length > 0 ? (
+          Object.keys(product).length > 0 ? (
+            product.map((data, i) => (
+              <CartCard
+                style={{ width: "100%", maxWidth: "500px" }}
+                key={i}
+                title={data.title}
+                description={data.description}
+                productId={data.pId}
+                image={data.imagedetail}
+                qty={data.qty}
+                price={data.price}
+                deletefunc={deleteFromProduct}
+                incrementfunc={incrementFromProduct}
+                decrementfunc={decrementFromProduct}
+              />
+            ))
+          ) : (
+            ""
+          )
+        ) : (
+          navigate("/login")
+        )}
+      </Col>
+
+      {/* Order Summary */}
+      <Col xs={12} lg={4}>
+        <Card
+          className="border-0 shadow-sm bg-light sticky-top"
+          style={{ top: "80px", zIndex: 100 }}
+        >
+          <Card.Body className="p-4">
+            <h4 className="mb-4">Order Summary</h4>
+            <div className="d-flex justify-content-between mb-2">
+              <span className="text-muted">Subtotal</span>
+              <span className="fw-bold">${totalAmount.toFixed(2)}</span>
+            </div>
+            <div className="d-flex justify-content-between mb-2">
+              <span className="text-muted">Shipping</span>
+              <span className="text-success">Free</span>
+            </div>
+            <hr />
+            <div className="d-flex justify-content-between mb-4">
+              <span className="h5 fw-bold">Total</span>
+              <span className="h5 fw-bold">${totalAmount.toFixed(2)}</span>
+            </div>
+            <PayButton amount={parseInt(totalAmount) + ".00"} />
+          </Card.Body>
+        </Card>
+      </Col>
+    </Row>
+  </Container>
+</div>
     </>
   );
 }

@@ -12,6 +12,7 @@
    "license": "ISC",
    "dependencies": {
       "@fortawesome/fontawesome-svg-core": "^6.7.2",
+      "@google-pay/button-react": "^3.2.1",
       "@parcel/resolver-default": "^2.15.2",
       "@reduxjs/toolkit": "^2.11.0",
       "axios": "^1.13.2",

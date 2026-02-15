@@ -17,7 +17,7 @@ export default function OurProducts() {
                                 <Row>
                                     <Col sm={3}>
                                         <img
-                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3wo2Q9cVOOJyX7JOjX9FpELrwP5xAATF9Pw&s"
+                                            src={`https://docker-apis.onrender.com/image/${productData.pId}`}
                                             style={{ height: "150px", width: "100%", margin: "0", padding: "0", maxWidth: "15  0px" }}
                                             alt="product"
                                         />

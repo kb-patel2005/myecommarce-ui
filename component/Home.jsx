@@ -56,6 +56,8 @@ export default function Home() {
     }
   }, [flag, totalPages, page]);
 
+  console.log(product)
+
   return (<>
     <div className='d-flex flex-wrap gap-3 flex-direction-column justify-content-center align-items-center'>
       {product.map((data, i) =>
