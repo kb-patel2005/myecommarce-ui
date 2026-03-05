@@ -12,7 +12,7 @@ export default function Home() {
 
       while (page < totalPages) {
         const response = await axios.get(
-          `https://docker-apis.onrender.com/products?page=${page}&size=3`
+          `https://docker-apis.onrender.com/products?page=${page}&size=5`
         );
         setProduct(prev => [...prev, ...response.data.content]);
         totalPages = response.data.totalPages;

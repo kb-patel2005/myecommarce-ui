@@ -69,8 +69,8 @@ export default function CartPage() {
       
       {/* import { Container, Row, Col, Card } from "react-bootstrap"; */}
 
-<div className="mt-2">
-  <h3 style={{ width: '50%', margin: 'auto', minWidth: '400px' }}>YOUR CHOOSED PRODUCTS</h3>
+<div>
+  <h3 style={{ width: '100%', margin: 'auto', minWidth: '400px', textAlign: 'center', background: 'lightgray', padding: '10px', color: 'white' }}>YOUR CHOOSED PRODUCTS</h3>
   <Container fluid>
     <Row className="flex-wrap">
       {/* Cart Items */}
@@ -103,7 +103,7 @@ export default function CartPage() {
       {/* Order Summary */}
       <Col xs={12} lg={3}>
         <Card
-          className="border-0 shadow-sm bg-light sticky-top"
+          className="border-0 shadow-sm bg-light sticky-top mt-4"
           style={{ top: "80px", zIndex: 100 }}
         >
           <Card.Body className="p-4">

@@ -27,7 +27,7 @@ export default function LoginForm() {
     if (action.payload === "") {alert("incorrect user name password"); } 
     else {
       alert("login successfully");
-      navigate('/');
+      navigate('/frontpage');
     }
 
   }
