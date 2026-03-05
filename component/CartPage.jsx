@@ -74,7 +74,7 @@ export default function CartPage() {
   <Container fluid>
     <Row className="flex-wrap">
       {/* Cart Items */}
-      <Col xs={12} lg={8} className="d-flex flex-column align-items-center">
+      <Col xs={12} lg={9} className="d-flex flex-column align-items-center">
         {Object.keys(selector.loginUser).length > 0 ? (
           Object.keys(product).length > 0 ? (
             product.map((data, i) => (
@@ -101,7 +101,7 @@ export default function CartPage() {
       </Col>
 
       {/* Order Summary */}
-      <Col xs={12} lg={4}>
+      <Col xs={12} lg={3}>
         <Card
           className="border-0 shadow-sm bg-light sticky-top"
           style={{ top: "80px", zIndex: 100 }}
@@ -110,7 +110,7 @@ export default function CartPage() {
             <h4 className="mb-4">Order Summary</h4>
             <div className="d-flex justify-content-between mb-2">
               <span className="text-muted">Subtotal</span>
-              <span className="fw-bold">${totalAmount.toFixed(2)}</span>
+              <span className="fw-bold">₹{totalAmount.toFixed(2)}</span>
             </div>
             <div className="d-flex justify-content-between mb-2">
               <span className="text-muted">Shipping</span>
@@ -119,7 +119,7 @@ export default function CartPage() {
             <hr />
             <div className="d-flex justify-content-between mb-4">
               <span className="h5 fw-bold">Total</span>
-              <span className="h5 fw-bold">${totalAmount.toFixed(2)}</span>
+              <span className="h5 fw-bold">₹{totalAmount.toFixed(2)}</span>
             </div>
             <PayButton amount={parseInt(totalAmount) + ".00"} />
           </Card.Body>

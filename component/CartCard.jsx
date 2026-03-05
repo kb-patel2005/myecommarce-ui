@@ -23,7 +23,7 @@ export default function CartCard({
   const dispatch = useDispatch();
 
   return (
-    <Card className="mb-3 p-2"  style={{border:'none'}}>
+    <Card className="mb-3 p-2"  style={{border:'none',borderRadius:'8px',boxShadow:'0 2px 8px rgba(0,0,0,0.1)',width:'100%'}}>
       <Container fluid>
         <Row className="align-items-center">
           {/* Image Section */}
@@ -74,10 +74,10 @@ export default function CartCard({
                   -
                 </Button>
               </Col>
-              <Col xs={12} sm={3} className="fw-bold">
+              <Col xs={12} sm={2} className="fw-bold">
               
               <div className='d-flex align-items-center'>
-                <div className='m-3'>{qty * price}</div>
+                <div className='m-3'>₹{qty * price}</div>
                 <div
                   style={{cursor:'pointer',fontSize:'30px'}}
                   onClick={() => {

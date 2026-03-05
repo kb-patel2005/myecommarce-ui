@@ -19,7 +19,7 @@ export default function ProductCard({ title, description, price, qty, image, img
   });
 
   return (
-    <Card className="shadow-sm border-0 rounded-4 overflow-hidden" style={{ maxWidth: '280px' }}>
+    <Card className="shadow-sm border-0 rounded-4 overflow-hidden" style={{ width: '280px' }}>
       {/* Image Placeholder */}
       <div className="position-relative bg-light d-flex align-items-center justify-content-center">
         <Link to='/productdetail' state={{title, description, price, qty, image, imgContentType, data1}}>
@@ -69,9 +69,9 @@ export default function ProductCard({ title, description, price, qty, image, img
 
         <div className="mt-auto d-flex justify-content-between align-items-center border-top pt-3">
           <div className="d-flex flex-column lh-sm">
-            <span className="h5 fw-bold mb-0">${price - price * 0.25}</span>
+            <span className="h5 fw-bold mb-0">₹{Math.ceil(price - (price * 0.25))}</span>
 
-            <small className="text-muted text-decoration-line-through">${price}</small>
+            <small className="text-muted text-decoration-line-through">₹{price}</small>
 
           </div>
           <Button variant="outline-dark"

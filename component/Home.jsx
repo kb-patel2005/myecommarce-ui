@@ -1,60 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { setProducts } from '../reducers/ProductReducer';
 import ProductCard from './ProductCard';
 import axios from 'axios';
 
 export default function Home() {
-  const dispatch = useDispatch();
   const [product, setProduct] = useState([]);
-  const [page, setPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(null);
-  const pageSize = 3;
-  const [flag, setFlag] = useState(false)
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await dispatch(setProducts());
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, [dispatch]);
+    const fetchProducts = async () => {
+      let page = 0;
+      let totalPages = 1;
 
-  useEffect(() => {
-    const fetchPage = async () => {
-      try {
-        const res = await axios.get(
-          `https://docker-apis.onrender.com/products?page=${page}&size=${pageSize}`
+      while (page < totalPages) {
+        const response = await axios.get(
+          `https://docker-apis.onrender.com/products?page=${page}&size=3`
         );
-
-        setProduct(prev => [...prev, ...res.data.content]);
-        setTotalPages(res.data.totalPages);
-
-        // After rendering this page, raise the flag
-        setFlag(true);
-      } catch (err) {
-        console.error('Error fetching product', err);
+        setProduct(prev => [...prev, ...response.data.content]);
+        totalPages = response.data.totalPages;
+        page++;
       }
     };
 
-    if (totalPages === null || page < totalPages) {
-      fetchPage();
-    }
-  }, [page]);
-
-  // When flag is raised, move to next page
-  useEffect(() => {
-    if (flag) {
-      if (page + 1 < totalPages) {
-        setPage(prev => prev + 1);
-      }
-      setFlag(false); // reset flag
-    }
-  }, [flag, totalPages, page]);
+    fetchProducts();
+  }, []);
 
   console.log(product)
 

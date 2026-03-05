@@ -49,7 +49,10 @@ export default function SignupForm() {
         e.preventDefault();
         userInsert();
         }}>
-        <h5>welcome our side...</h5>
+          <center>
+            <h1>welcome our side...</h1>
+          </center>
+        
 
         <Form.Group className="mb-3" controlId="formGridEmail">
           <Form.Label>Email</Form.Label>
